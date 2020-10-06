@@ -1,0 +1,16 @@
+{
+  local_certs
+}
+
+proxy.com:2016 {
+  reverse_proxy {
+  to backend.com:443
+    transport http {
+      tls_trusted_ca_certs /data/caddy/pki/authorities/local/root.crt 
+    }
+  }
+}
+
+backend.com {
+  respond "just to generate the cert"
+}

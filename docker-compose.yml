@@ -1,0 +1,15 @@
+version: '3.5'
+
+services:
+  proxy.com:
+    image: caddy:2.2.0
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy/data:/data
+      - ./caddy/conf:/config
+
+  backend.com:
+    image: mendhak/http-https-echo
+    volumes:
+      - ./caddy/data/caddy/certificates/local/backend.com/backend.com.crt:/app/fullchain.pem
+      - ./caddy/data/caddy/certificates/local/backend.com/backend.com.key:/app/privkey.pem
